@@ -117,14 +117,12 @@ class SystemInformation:
 
         if_addrs = psutil.net_if_addrs()
         net_io = psutil.net_io_counters()
-
-        print(if_addrs.items())
         
         devices = []
 
         for interface_name, interface_addresses in if_addrs.items():
             for address in interface_addresses:
-                
+
                 if str(address.family) == '2':
                     item = {interface_name:{"IP": address.address,
                                             "mascara": address.netmask,
