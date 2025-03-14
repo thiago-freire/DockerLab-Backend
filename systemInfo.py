@@ -124,7 +124,7 @@ class SystemInformation:
 
         for interface_name, interface_addresses in if_addrs.items():
             for address in interface_addresses:
-                print(address)
+                print(str(address.family))
                 if str(address.family) == 'AddressFamily.AF_INET':
                     item = {interface_name:{"IP": address.address,
                                             "mascara": address.netmask,
