@@ -14,7 +14,10 @@ class MachineInfoService:
 
     lista = []
     for machine in machines:
-      x = requests.get(f'http://{machine.ip}:5001/')
-      lista.append(x.text)
+      print(machine)
+      x = requests.get(f'http://{machine["ip"]}:5001/')
+      lista.append(json.loads(x.text))
 
-    return json.loads(lista)
+    print(lista)
+
+    return json.loads(json.dumps(lista))

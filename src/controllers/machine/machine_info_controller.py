@@ -14,4 +14,5 @@ class MachineInfoController:
             return Response(status=201, response={"info": machineInfo})
         
         except Exception as e:
-            return Response(status=e.status_code, response={"error": e.message})
+            print(e)
+            return Response(status=500, response={"error": str(e)})

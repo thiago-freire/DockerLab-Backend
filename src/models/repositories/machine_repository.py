@@ -86,7 +86,7 @@ class MachineRepository(MachineRepositoryInterface):
             finally:
                 connection.session.close()
 
-    def update_user(self, machine: Machine) -> bool:
+    def update_machine(self, machine: Machine) -> bool:
 
         if not machine:
             return False

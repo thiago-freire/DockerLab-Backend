@@ -9,12 +9,12 @@ class Machine(Base):
     __tablename__ = "machine"
 
     id = Column("id", Integer, primary_key=True, autoincrement=True)
-    name = Column("name", String(15), nullable=True)
+    name = Column("nome", String(15), nullable=True)
     ip = Column("ip", String(15), nullable=False)
     user = Column("usuario", String(30), nullable=False)
     password = Column("senha", String(200), nullable=False)
     port = Column("porta", String(1), nullable=False)
-    create = Column("cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
+    # create = Column("cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
 
     __table_args__ = (UniqueConstraint('ip', name='_ip_machine'),)
 
@@ -43,6 +43,5 @@ class Machine(Base):
             "name": self.name,
             "user": self.user,
             "port": self.port,
-            "password": self.password,
-            "create": self.create
+            "password": self.password
         }

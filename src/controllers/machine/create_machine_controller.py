@@ -15,6 +15,12 @@ class CreateMachineController:
         password = request.get_json().get('password')
         port = request.get_json().get('port')
         user = request.get_json().get('user')
+
+        print(name, type(name))
+        print(ip, type(ip))
+        print(password, type(password))
+        print(port, type(port))
+        print(user, type(user))
         
 
         data_exists = all([name, ip, password, port, user])
@@ -29,4 +35,5 @@ class CreateMachineController:
             return Response(status=201, response={"machine": machine})
         
         except Exception as e:
-            return Response(status=e.status_code, response={"error": e.message})
+            print(e)
+            return Response(status=500, response={"error": str(e)})

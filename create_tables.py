@@ -4,24 +4,23 @@ def createTables():
 
     sql_statements = [ 
     """CREATE TABLE IF NOT EXISTS Machine (
-            id INTEGER PRIMARY KEY, 
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
             ip TEXT NOT NULL, 
-            user TEXT NOT NULL, 
+            nome TEXT,
+            usuario TEXT NOT NULL, 
             senha TEXT NOT NULL, 
-            porta INTEGER NOT NULL,
-            cadastro DATE NOT NULL
+            porta INTEGER NOT NULL
         );""",
 
     """CREATE TABLE IF NOT EXISTS User (
-            id INTEGER PRIMARY KEY, 
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
             email TEXT NOT NULL, 
-            name TEXT,
-            cadastro DATE NOT NULL,
-            profile INTEGER NOT NULL
+            nome TEXT,
+            perfil TEXT NOT NULL
         );""",
 
     """CREATE TABLE IF NOT EXISTS nodes (
-            id INTEGER PRIMARY KEY, 
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
             name TEXT NOT NULL,
             id_machine INTEGER NOT NULL,
             id_user INTEGER NOT NULL,
@@ -29,7 +28,6 @@ def createTables():
             ram INTEGER NOT NULL,
             device INTEGER NOT NULL,
             network INTEGER NOT NULL,
-            cadastro DATE NOT NULL,
             FOREIGN KEY (id_machine) REFERENCES Machine (id),
             FOREIGN KEY (id_user) REFERENCES User (id)
         );"""
@@ -53,3 +51,7 @@ def createTables():
             print("Tables created successfully.")
     except sqlite3.OperationalError as e:
         print("Failed to create tables:", e)
+
+if __name__ == "__main__":
+
+    createTables()
