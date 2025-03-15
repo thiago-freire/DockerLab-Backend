@@ -3,8 +3,8 @@ import sqlite3
 def createTables():
 
     sql_statements = [ 
-    """CREATE TABLE IF NOT EXISTS Machine (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    """CREATE TABLE IF NOT EXISTS MAQUINA (
+            id_maquina INTEGER PRIMARY KEY AUTOINCREMENT, 
             ip TEXT NOT NULL, 
             nome TEXT,
             usuario TEXT NOT NULL, 
@@ -12,24 +12,24 @@ def createTables():
             porta INTEGER NOT NULL
         );""",
 
-    """CREATE TABLE IF NOT EXISTS User (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    """CREATE TABLE IF NOT EXISTS USUARIO (
+            id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, 
             email TEXT NOT NULL, 
             nome TEXT,
             perfil TEXT NOT NULL
         );""",
 
-    """CREATE TABLE IF NOT EXISTS nodes (
+    """CREATE TABLE IF NOT EXISTS NODOCKER (
             id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            name TEXT NOT NULL,
-            id_machine INTEGER NOT NULL,
-            id_user INTEGER NOT NULL,
+            nome TEXT NOT NULL,
+            id_maquina INTEGER NOT NULL,
+            id_usuario INTEGER NOT NULL,
             cpu_cores INTEGER NOT NULL,
             ram INTEGER NOT NULL,
             device INTEGER NOT NULL,
             network INTEGER NOT NULL,
-            FOREIGN KEY (id_machine) REFERENCES Machine (id),
-            FOREIGN KEY (id_user) REFERENCES User (id)
+            FOREIGN KEY (id_maquina) REFERENCES Maquina (id_maquina),
+            FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario)
         );"""
     ]
 
@@ -41,9 +41,7 @@ def createTables():
 
             # execute statements
             for statement in sql_statements:
-                print(statement)
                 cursor.execute(statement)
-                print("Executou create")
 
             # commit the changes
             conn.commit()

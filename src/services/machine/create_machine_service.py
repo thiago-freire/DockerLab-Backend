@@ -4,6 +4,7 @@ from src.models.repositories.interfaces import MachineRepositoryInterface
 from src.errors import AlReadyExists, BadRequest
 
 class CreateMachineService:
+  
   def __init__(self, machine_repository: MachineRepositoryInterface) -> None:
     self.machine_repository = machine_repository
 

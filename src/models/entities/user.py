@@ -1,21 +1,19 @@
 from sqlalchemy import Column, String, Integer, UniqueConstraint
 from src.infra.configs import Base
-# from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship
 
 class User(Base):
+    
     __tablename__ = "usuario"
 
-    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    id = Column("id_usuario", Integer, primary_key=True, autoincrement=True)
     name = Column("nome", String(100), nullable=False)
     email = Column(String(100), nullable=False)
     profile = Column("perfil", String(1), nullable=False)
 
     __table_args__ = (UniqueConstraint('email', name='_email_uc'),)
 
-    # scenarios = relationship("Scenario", back_populates='user', uselist=True)
-    # gambiarras = relationship("Gambiarra", back_populates='udb_baseser', uselist=True)
-    # regions = relationship("Region", back_populates='user', uselist=True)
-    # files = relationship("File", back_populates="user", uselist=True)
+    # nodes = relationship("Node", back_populates='user', uselist=True)
 
     def __init__(self, name, email, profile) -> None:
         self.name = name 

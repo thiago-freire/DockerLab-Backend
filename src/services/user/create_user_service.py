@@ -4,6 +4,7 @@ from src.models.repositories.interfaces import UserRepositoryInterface
 from src.errors import AlReadyExists, BadRequest
 
 class CreateUserService:
+  
   def __init__(self, user_repository: UserRepositoryInterface) -> User:
     self.user_repository = user_repository
 

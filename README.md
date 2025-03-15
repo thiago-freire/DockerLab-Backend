@@ -1,3 +1,3 @@
 # DockerLab-Backend
 
-python -m venv .env
+python -m venv .venv

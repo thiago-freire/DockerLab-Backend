@@ -1,14 +1,15 @@
-from sqlalchemy import Column, String, Integer, UniqueConstraint, DateTime
-from sqlalchemy.sql import func
+from sqlalchemy import Column, String, Integer, UniqueConstraint#, DateTime
+# from sqlalchemy.sql import func
 from src.infra.configs import Base
 
-from datetime import timedelta
-# from sqlalchemy.orm import relationship
+# from datetime import timedelta
+from sqlalchemy.orm import relationship
 
 class Machine(Base):
-    __tablename__ = "machine"
+    
+    __tablename__ = "maquina"
 
-    id = Column("id", Integer, primary_key=True, autoincrement=True)
+    id = Column("id_maquina", Integer, primary_key=True, autoincrement=True)
     name = Column("nome", String(15), nullable=True)
     ip = Column("ip", String(15), nullable=False)
     user = Column("usuario", String(30), nullable=False)
@@ -17,11 +18,6 @@ class Machine(Base):
     # create = Column("cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
 
     __table_args__ = (UniqueConstraint('ip', name='_ip_machine'),)
-
-    # scenarios = relationship("Scenario", back_populates='user', uselist=True)
-    # gambiarras = relationship("Gambiarra", back_populates='udb_baseser', uselist=True)
-    # regions = relationship("Region", back_populates='user', uselist=True)
-    # files = relationship("File", back_populates="user", uselist=True)
 
     def __init__(self, ip, name, user, password, port) -> None:
         self.ip = ip 
