@@ -1,8 +1,8 @@
-from sqlalchemy import Column, String, Integer, UniqueConstraint#, DateTime
-# from sqlalchemy.sql import func
+from sqlalchemy import Column, String, Integer, UniqueConstraint, DateTime
+from sqlalchemy.sql import func
 from src.infra.configs import Base
 
-# from datetime import timedelta
+from datetime import timedelta
 from sqlalchemy.orm import relationship
 
 class Machine(Base):
@@ -15,7 +15,7 @@ class Machine(Base):
     user = Column("usuario", String(30), nullable=False)
     password = Column("senha", String(200), nullable=False)
     port = Column("porta", String(1), nullable=False)
-    # create = Column("cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
+    create_date = Column("data_cadastro", DateTime(timezone=True), default=func.now(), nullable=False)
 
     __table_args__ = (UniqueConstraint('ip', name='_ip_machine'),)
 

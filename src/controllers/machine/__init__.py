@@ -1,2 +1,3 @@
 from .machine_info_controller import MachineInfoController
 from .create_machine_controller import CreateMachineController
+from .list_machine_controller import ListMachineController

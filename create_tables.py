@@ -9,14 +9,16 @@ def createTables():
             nome TEXT,
             usuario TEXT NOT NULL, 
             senha TEXT NOT NULL, 
-            porta INTEGER NOT NULL
+            porta INTEGER NOT NULL,
+            data_cadastro timestamp NOT NULL
         );""",
 
     """CREATE TABLE IF NOT EXISTS USUARIO (
             id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, 
             email TEXT NOT NULL, 
             nome TEXT,
-            perfil TEXT NOT NULL
+            perfil TEXT NOT NULL,
+            data_cadastro timestamp NOT NULL
         );""",
 
     """CREATE TABLE IF NOT EXISTS NODOCKER (
@@ -28,6 +30,7 @@ def createTables():
             ram INTEGER NOT NULL,
             device INTEGER NOT NULL,
             network INTEGER NOT NULL,
+            data_cadastro timestamp NOT NULL,
             FOREIGN KEY (id_maquina) REFERENCES Maquina (id_maquina),
             FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario)
         );"""

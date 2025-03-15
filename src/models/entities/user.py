@@ -1,5 +1,8 @@
-from sqlalchemy import Column, String, Integer, UniqueConstraint
+from sqlalchemy import Column, String, Integer, UniqueConstraint, DateTime
+from sqlalchemy.sql import func
 from src.infra.configs import Base
+
+from datetime import timedelta
 from sqlalchemy.orm import relationship
 
 class User(Base):
@@ -10,6 +13,7 @@ class User(Base):
     name = Column("nome", String(100), nullable=False)
     email = Column(String(100), nullable=False)
     profile = Column("perfil", String(1), nullable=False)
+    create_date = Column("data_cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
 
     __table_args__ = (UniqueConstraint('email', name='_email_uc'),)
 

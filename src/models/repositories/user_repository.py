@@ -43,6 +43,20 @@ class UserRepository(UserRepositoryInterface):
             finally:
                 connection.session.close()
 
+    def get_all(self):
+
+        with DbConfigHandler() as connection:
+            try:
+                list_users = connection.session.query(User).all()
+
+                return list_users
+            except: 
+                connection.session.rollback()
+                raise
+            finally:
+                connection.session.close()
+
+
     def delete_user(self, user: User) -> bool:
         with DbConfigHandler() as connection:
             try:
