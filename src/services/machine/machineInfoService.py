@@ -1,7 +1,7 @@
 import requests
 import json
 
-from models.repositories.interfaces.machine_repository_interface import MachineRepositoryInterface
+from src.models.repositories.interfaces import MachineRepositoryInterface
 
 class MachineInfoService:
 

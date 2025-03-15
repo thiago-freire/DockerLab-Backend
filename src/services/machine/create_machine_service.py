@@ -1,5 +1,5 @@
 from typing import Type
-from models.entities.machine import Machine
+from src.models.entities.machine import Machine
 from src.models.repositories.interfaces import MachineRepositoryInterface
 from src.errors import AlReadyExists, BadRequest
 

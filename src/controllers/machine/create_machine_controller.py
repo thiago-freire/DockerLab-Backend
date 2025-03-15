@@ -1,6 +1,6 @@
 from typing import Type
 from flask import Response, Request
-from errors import BadRequest
+from src.errors import BadRequest
 from src.services.machine import CreateMachineService
 
 class CreateMachineController:

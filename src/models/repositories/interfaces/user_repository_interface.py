@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from models.entities.user import User
+from src.models.entities.user import User
 
 class UserRepositoryInterface(ABC):
     """ classe abstrata que serve """

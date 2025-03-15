@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from models.entities.machine import Machine
+from src.models.entities.machine import Machine
 
 class MachineRepositoryInterface(ABC):
     
