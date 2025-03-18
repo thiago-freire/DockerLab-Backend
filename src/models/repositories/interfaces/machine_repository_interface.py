@@ -33,3 +33,7 @@ class MachineRepositoryInterface(ABC):
     @abstractmethod
     def update_machine(self, machine: Machine):
         raise NotImplementedError("Necessario implementar o método")
+    
+    @abstractmethod
+    def getMachineInfo(self, machine: Machine):
+        raise NotImplementedError("Necessario implementar o método")

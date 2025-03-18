@@ -109,3 +109,9 @@ class MachineRepository(MachineRepositoryInterface):
 
             finally:
                 connection.session.close()
+    
+    def getMachineInfo(self, machine: Machine, get: function, loads: function):
+
+        x = get(f'http://{machine.ip}:5001/')
+
+        return loads(x.text)
