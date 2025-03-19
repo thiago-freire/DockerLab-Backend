@@ -2,16 +2,26 @@ from collections import namedtuple
 from src.models.repositories.interfaces import MachineRepositoryInterface
 from src.infra.configs.db_config_handler import DbConfigHandler
 from src.models.entities.machine import Machine
-from sqlalchemy import update
+# from sqlalchemy import update
+
+import paramiko
+import paramiko.client
 
 class MachineRepository(MachineRepositoryInterface):
     
     def create_machine(self, ip, name, user , password, port):
+
+        self.host = ip
+        self.user = user
+        self.password = password
+
         with DbConfigHandler() as connection:
             try:
                 new_machine = Machine(ip=ip, name=name, user=user, password=password, port=port)
                 connection.session.add(new_machine)
                 connection.session.commit()
+
+                self.__createServiceInfo()
 
                 return new_machine.to_dict()
             except: 
@@ -115,3 +125,50 @@ class MachineRepository(MachineRepositoryInterface):
         x = get(f'http://{machine.ip}:5001/')
 
         return loads(x.text)
+
+    def __runCommand(self, command: str, sudo: bool = False):
+
+        client = paramiko.client.SSHClient()
+
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(self.host, username=self.user, password=self.password)
+        
+        if sudo:
+            _stdin, _stdout, _stderr = client.exec_command("sudo -S -p '' %s" % command)
+            print("EXECUTANDO SUDO COMMAND")
+            _stdin.write(self.password + "\n")
+            _stdin.flush()
+        else:
+            _stdin, _stdout, _stderr = client.exec_command(command)
+        
+        print(_stdout.read().decode(), _stderr.read().decode())
+
+        client.close()
+
+    def __createServiceInfo(self):
+
+        print("========================================= CLONING PROJECT =========================================")
+        command = "git clone https://github.com/thiago-freire/DockerLab-SystemInfo.git;"
+        self.__runCommand(command)
+
+
+        print("========================================= INSTALLING PROJECT =========================================")
+        command = "cd DockerLab-SystemInfo;/bin/python3 -m venv .env;source .env/bin/activate;" \
+                "pip install -r requirements.txt"
+        self.__runCommand(command)
+
+        print("========================================= CREATE SERVICE =========================================")
+        command = "cp DockerLab-SystemInfo/system-info.service /etc/systemd/system/"
+        self.__runCommand(command, True)
+
+        print("========================================= RELOAD DAEMON =========================================")
+        command = "systemctl daemon-reload"
+        self.__runCommand(command, True)
+
+        print("========================================= ENABLE SERVICE =========================================")
+        command = "systemctl enable system-info.service"
+        self.__runCommand(command, True)
+
+        print("========================================= START SERVICE =========================================")
+        command = "systemctl start system-info.service"
+        self.__runCommand(command, True)

@@ -56,7 +56,6 @@ class UserRepository(UserRepositoryInterface):
             finally:
                 connection.session.close()
 
-
     def delete_user(self, user: User) -> bool:
         with DbConfigHandler() as connection:
             try:
