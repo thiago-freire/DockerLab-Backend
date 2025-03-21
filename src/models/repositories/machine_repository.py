@@ -156,7 +156,7 @@ class MachineRepository(MachineRepositoryInterface):
         command = "apt update"
         self.__runCommand(command, True)
 
-        command = "apt install python3.8-venv -y"
+        command = "apt install python3-venv -y"
         self.__runCommand(command, True)
 
         print("========================================= INSTALLING PROJECT =========================================")
