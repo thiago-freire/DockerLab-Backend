@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  back-end:
+    build:
+      context: ./DockerLab-Backend
+      dockerfile: Dockerfile
+    container_name: dockerlab-backend
+    volumes:
+      - './DockerLab-Backend:/usr/src/app'
+    ports:
+      - 5000:5000
+    environment:
+      - FLASK_CONFIG=development
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@tutorial-db:5432/dev_db
+      - SECRET_KEY=ZQbn05PDeA7v11
+
+  client:
+    build:
+      context: ./projeto-teste
+      dockerfile: Dockerfile
+    volumes:
+      - './projeto-teste:/app'
+      - '/app/node_modules'
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - back-end
