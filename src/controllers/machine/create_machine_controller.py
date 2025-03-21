@@ -10,11 +10,12 @@ class CreateMachineController:
 
     def handler(self, request: Type[Request]) -> Response:
 
-        name = request.get_json().get('name')
-        ip = request.get_json().get('ip')
-        password = request.get_json().get('password')
-        port = request.get_json().get('port')
-        user = request.get_json().get('user')
+
+        name = request.get_json().get('Nome')
+        ip = request.get_json().get('Network')
+        password = request.get_json().get('senha')
+        port = request.get_json().get('porta')
+        user = request.get_json().get('login')
 
         print(name, type(name))
         print(ip, type(ip))

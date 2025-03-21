@@ -35,9 +35,10 @@ class Machine(Base):
     def to_dict(self):
         return {
             "id": self.id,
-            "ip": self.ip,
-            "name": self.name,
-            "user": self.user,
-            "port": self.port,
-            "password": self.password
+            "Network": self.ip,
+            "Nome": self.name,
+            "login": self.user,
+            "porta": self.port,
+            "senha": self.password,
+            "create_date": self.create_date.strftime('%d/%m/%Y')
         }

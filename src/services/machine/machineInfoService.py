@@ -8,16 +8,8 @@ class MachineInfoService:
   def __init__(self, machine_repository: MachineRepositoryInterface) -> None:
     self.machine_repository = machine_repository
     
-  def execute(self):
-    
-    machines = self.machine_repository.get_all()
+  def execute(self, ip: str):
 
-    lista = []
-    for machine in machines:
-      print(machine)
-      x = requests.get(f'http://{machine["ip"]}:5001/')
-      lista.append()
+    info = self.machine_repository.getMachineInfo(ip, requests.get, json.loads)    
 
-    print(lista)
-
-    return json.loads(json.dumps(lista))
+    return info

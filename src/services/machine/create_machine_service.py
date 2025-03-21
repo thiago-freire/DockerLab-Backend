@@ -8,9 +8,9 @@ class CreateMachineService:
   def __init__(self, machine_repository: MachineRepositoryInterface) -> None:
     self.machine_repository = machine_repository
 
-  def execute(self, name: Type[str], ip: Type[str], user: Type[str], password: Type[str], port: Type[int]) -> Machine:
+  def execute(self, name: Type[str], ip: Type[str], user: Type[str], password: Type[str], port: Type[str]) -> Machine:
     
-    verify_data = isinstance(name, str) and isinstance(ip, str) and isinstance(password, str) and isinstance(user, str) and isinstance(port, int)
+    verify_data = isinstance(name, str) and isinstance(ip, str) and isinstance(password, str) and isinstance(user, str) and isinstance(port, str)
 
     if not verify_data:
       raise BadRequest("dados informados estão incorretos")

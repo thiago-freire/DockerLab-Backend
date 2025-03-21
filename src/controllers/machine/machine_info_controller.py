@@ -1,17 +1,19 @@
-from flask import Response
+from typing import Type
+from flask import Request, Response
 from src.services.machine import MachineInfoService
 
 class MachineInfoController:
     def __init__(self, machine_info_service: MachineInfoService) -> None:
         self.machine_info_service = machine_info_service
 
-    def handler(self) -> Response:
+    def handler(self, request: Type[Request]) -> Response:
 
         try:
 
-            machineInfo = self.machine_info_service.execute()
+            ip = request.get_json().get('ip')
+            machineInfo = self.machine_info_service.execute(ip)
 
-            return Response(status=201, response={"info": machineInfo})
+            return Response(status=201, response={"machine": machineInfo})
         
         except Exception as e:
             print(e)

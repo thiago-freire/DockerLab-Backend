@@ -35,5 +35,5 @@ class MachineRepositoryInterface(ABC):
         raise NotImplementedError("Necessario implementar o método")
     
     @abstractmethod
-    def getMachineInfo(self, machine: Machine):
+    def getMachineInfo(self, machine: Machine, get, loads):
         raise NotImplementedError("Necessario implementar o método")

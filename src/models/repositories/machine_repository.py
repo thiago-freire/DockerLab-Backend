@@ -120,12 +120,13 @@ class MachineRepository(MachineRepositoryInterface):
             finally:
                 connection.session.close()
     
-    def getMachineInfo(self, machine: Machine, get: function, loads: function):
+    def getMachineInfo(self, ip: str, get, loads):
 
-        x = get(f'http://{machine.ip}:5001/')
+        x = get(f'http://{ip}:5001/')
 
         return loads(x.text)
-
+        
+        
     def __runCommand(self, command: str, sudo: bool = False):
 
         client = paramiko.client.SSHClient()
@@ -151,6 +152,12 @@ class MachineRepository(MachineRepositoryInterface):
         command = "git clone https://github.com/thiago-freire/DockerLab-SystemInfo.git;"
         self.__runCommand(command)
 
+        print("========================================= INSTALLING PYTHON ENV =========================================")
+        command = "apt update"
+        self.__runCommand(command, True)
+
+        command = "apt install python3.8-venv -y"
+        self.__runCommand(command, True)
 
         print("========================================= INSTALLING PROJECT =========================================")
         command = "cd DockerLab-SystemInfo;/bin/python3 -m venv .env;source .env/bin/activate;" \

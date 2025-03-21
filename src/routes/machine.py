@@ -4,11 +4,11 @@ from src.compose.machine_compose import machine_info_compose, create_machine_com
 
 machine_routes_bp = Blueprint("machine_routes", __name__)
 
-@machine_routes_bp.route("/info", methods=["GET"])
+@machine_routes_bp.route("/info", methods=["POST"])
 def machine_info():
     
     machine_info_controller = machine_info_compose()
-    response = machine_info_controller.handler()
+    response = machine_info_controller.handler(request)
     
     return jsonify(response.response), response.status
 
