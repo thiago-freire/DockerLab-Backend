@@ -31,6 +31,18 @@ class UserRepository(UserRepositoryInterface):
             finally:
                 connection.session.close()
 
+    def get_user_by_login(self, login):
+        
+        with DbConfigHandler() as connection:
+            try:
+                user = connection.session.query(User).filter_by(login=login).first()
+                return user
+            except: 
+                connection.session.rollback()
+                raise
+            finally:
+                connection.session.close()
+
     def get_user_by_id(self, id):
         with DbConfigHandler() as connection:
             try:

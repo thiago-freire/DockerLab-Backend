@@ -15,8 +15,10 @@ def createTables():
 
     """CREATE TABLE IF NOT EXISTS USUARIO (
             id_usuario INTEGER PRIMARY KEY AUTOINCREMENT, 
+            login TEXT, 
+            nome TEXT, 
             email TEXT NOT NULL, 
-            nome TEXT,
+            senha TEXT,
             perfil TEXT NOT NULL,
             data_cadastro timestamp NOT NULL
         );""",

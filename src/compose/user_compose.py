@@ -3,12 +3,14 @@ from src.models.repositories.user_repository import UserRepository
 
 from src.controllers.user import (
     CreateUserController,
-    ListUserController
+    ListUserController,
+    AuthenticateUserController
 )
 
 from src.services.user import (
     CreateUserService,
-    ListUserService
+    ListUserService,
+    AutheticateUserService
 )
 
 def create_user_compose():
@@ -26,3 +28,11 @@ def list_user_compose():
     list_user_controller = ListUserController(list_user_service)
 
     return list_user_controller
+
+def authenticate_user_compose():
+    
+    user_repository = UserRepository()
+    authenticate_user_service = AutheticateUserService(user_repository)
+    authenticate_user_controller = AuthenticateUserController(authenticate_user_service)
+
+    return authenticate_user_controller

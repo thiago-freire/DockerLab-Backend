@@ -14,6 +14,10 @@ class UserRepositoryInterface(ABC):
         raise NotImplementedError("Necessario implementar o método")
     
     @abstractmethod
+    def get_user_by_login(self, login: str) -> User:
+        raise NotImplementedError("Necessario implementar o método")
+    
+    @abstractmethod
     def get_user_by_id(self, id: int):
         raise NotImplementedError("Necessario implementar o método")
     

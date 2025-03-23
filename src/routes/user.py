@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request, Response
-from src.compose.user_compose import create_user_compose, list_user_compose
+from src.compose.user_compose import create_user_compose, list_user_compose, authenticate_user_compose
 
 user_routes_bp = Blueprint("user_routes", __name__)
 
-@user_routes_bp.route("/create_user", methods=["POST"])
+@user_routes_bp.route("/create", methods=["POST"])
 def register_user():
     
     create_user_controller = create_user_compose()
@@ -16,5 +16,13 @@ def list_user():
     
     list_user_controller = list_user_compose()
     response = list_user_controller.handler()
+    
+    return jsonify(response.response), response.status
+
+@user_routes_bp.route("/login", methods=["POST"])
+def login_user():
+    
+    authenticate_user_controller = authenticate_user_compose()
+    response = authenticate_user_controller.handler(request)
     
     return jsonify(response.response), response.status
