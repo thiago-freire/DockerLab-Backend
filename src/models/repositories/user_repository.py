@@ -5,10 +5,17 @@ from src.models.entities.user import User
 
 class UserRepository(UserRepositoryInterface):
     
-    def create_user(self, name, email , profile):
+    def create_user(self, name, email , profile, login, password):
         with DbConfigHandler() as connection:
             try:
-                new_user = User(name=name, email=email, profile=profile)
+
+                print(name, type(name))
+                print(email, type(email))        
+                print(profile, type(profile))
+                print(login, type(login))
+                print(password, type(password))
+                
+                new_user = User(name=name, email=email, profile=profile, login=login, password=password)
                 connection.session.add(new_user)
                 connection.session.commit()
 

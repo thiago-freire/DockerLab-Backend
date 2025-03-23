@@ -15,7 +15,7 @@ class User(Base):
     login = Column(String(90), nullable=False)
     profile = Column("perfil", String(1), nullable=False)
     password = Column("senha", String(100), nullable=False)
-    create_date = Column("data_cadastro", DateTime(timezone=True), default=func.now() - timedelta(hours=3), nullable=False)
+    create_date = Column("data_cadastro", DateTime(timezone=True), default=func.now(), nullable=False)
 
     __table_args__ = (UniqueConstraint('email', name='_email_uc'),)
 

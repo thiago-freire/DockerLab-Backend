@@ -13,19 +13,23 @@ class CreateUserController:
         name = request.get_json().get('name')
         email = request.get_json().get('email')
         profile = request.get_json().get('profile')
+        login = request.get_json().get('login')
+        password = request.get_json().get('password')
 
-        data_exists = all([name, email])
+        data_exists = all([name, email, profile, login, password])
 
         try:
             if not data_exists:
-                raise BadRequest("Precisa enviar todos os dados: name, profile e email")
+                raise BadRequest("Precisa enviar todos os dados: name, profile, password, login e email")
             
 
             user = self.create_user_service.execute(name= name,
                                                     email =  email,
-                                                    profile=profile
-                                                )
+                                                    profile=profile,
+                                                    login=login,
+                                                    password=password)
 
             return Response(status=201, response={"user": user})
         except Exception as e:
-            return Response(status=e.status_code, response={"error": e.message})
+            print(e)
+            return Response(status=500, response={"error": "e"})

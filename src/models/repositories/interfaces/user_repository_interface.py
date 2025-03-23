@@ -5,7 +5,7 @@ from src.models.entities.user import User
 class UserRepositoryInterface(ABC):
     """ classe abstrata que serve """
     @abstractmethod
-    def create_user(self, name, email , profile) -> User:
+    def create_user(self, name, email , profile, login, password) -> User:
         """ metodo para criar usuário """
         raise NotImplementedError("Necessario implementar o método")
     
