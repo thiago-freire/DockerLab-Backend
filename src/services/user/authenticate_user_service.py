@@ -18,13 +18,13 @@ class AutheticateUserService:
             if not user_exists:
                 raise BadRequest("email ou password estão incorretos")
             
-            # decoded_password = check_password_hash(user_exists.password, password)
+            decoded_password = check_password_hash(user_exists.password, password)
 
-            # if not decoded_password:
-            #     raise BadRequest("email ou password estão incorretos")
+            if not decoded_password:
+                raise BadRequest("email ou password estão incorretos")
             
     
-            time = datetime.timedelta(hours=10)
+            # time = datetime.timedelta(hours=10)
             # payload = {
             #     "id": user_exists.id,
             #     "exp": datetime.datetime.now(datetime.timezone.utc) + time

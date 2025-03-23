@@ -1,5 +1,6 @@
 from typing import Type
 from src.models.entities.user import User
+from werkzeug.security import generate_password_hash
 from src.models.repositories.interfaces import UserRepositoryInterface
 from src.errors import AlReadyExists, BadRequest
 
@@ -19,7 +20,9 @@ class CreateUserService:
 
     if email_exists:
       raise AlReadyExists("Já existe um usuário utilizando este email")
+    
+    password_hash = generate_password_hash(password)
 
-    user = self.user_repository.create_user(name=name, email=email, profile=profile, login=login, password=password)
+    user = self.user_repository.create_user(name=name, email=email, profile=profile, login=login, password=password_hash)
 
     return user
