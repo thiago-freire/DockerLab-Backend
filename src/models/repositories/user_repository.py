@@ -68,7 +68,8 @@ class UserRepository(UserRepositoryInterface):
             try:
                 list_users = connection.session.query(User).all()
 
-                return list_users
+                user_dicts = [user.to_dict() for user in list_users]
+                return user_dicts
             except: 
                 connection.session.rollback()
                 raise
