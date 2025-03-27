@@ -1,3 +1,4 @@
 from .create_user_controller import CreateUserController
 from .list_user_controller import ListUserController
 from .authenticate_user_controller import AuthenticateUserController
+from .update_user_controller import UpdateUserController

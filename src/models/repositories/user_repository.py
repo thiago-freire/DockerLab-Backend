@@ -95,9 +95,12 @@ class UserRepository(UserRepositoryInterface):
                 if not user:
                     return False
                 
-                u = connection.session.query(User).filter_by(id=id).first()
+                u = connection.session.query(User).filter_by(id=user.id).first()
 
                 u.name = user.name
+                u.profile = user.profile
+                u.password = user.password
+                u.login = user.login
                 u.profile = user.profile
                 
                 return True

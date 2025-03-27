@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, Response
-from src.compose.user_compose import create_user_compose, list_user_compose, authenticate_user_compose
+from src.compose.user_compose import create_user_compose, list_user_compose, authenticate_user_compose, update_user_compose
 
 user_routes_bp = Blueprint("user_routes", __name__)
 
@@ -10,6 +10,15 @@ def register_user():
     response = create_user_controller.handler(request)
     
     return jsonify(response.response), response.status
+
+@user_routes_bp.route("/update", methods=["POST"])
+def update_user():
+    
+    update_user_controller = update_user_compose()
+    response = update_user_controller.handler(request)
+    
+    return jsonify(response.response), response.status
+
 
 @user_routes_bp.route("/list", methods=["GET"])
 def list_user():

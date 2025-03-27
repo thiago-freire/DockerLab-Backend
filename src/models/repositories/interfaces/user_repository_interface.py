@@ -26,9 +26,9 @@ class UserRepositoryInterface(ABC):
         raise NotImplementedError("Necessario implementar o método")
     
     @abstractmethod
-    def delete_user(self, user: User):
+    def delete_user(self, user: User)->bool:
         raise NotImplementedError("Necessario implementar o método")
     
     @abstractmethod
-    def update_user(self, user: User):
+    def update_user(self, user: User)->bool:
         raise NotImplementedError("Necessario implementar o método")
