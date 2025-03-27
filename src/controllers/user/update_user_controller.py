@@ -31,6 +31,7 @@ class UpdateUserController:
                                                     login=login,
                                                     password=password)
 
-            return Response(status=201, response={"response": resp})
+            return Response(status=201, response={"resp": resp})
         except Exception as e:
-            return Response(status=500, response={"error": e})
+            print(e)
+            return Response(status=500, response={"error": str(e)})

@@ -31,4 +31,5 @@ class CreateUserController:
 
             return Response(status=201, response={"user": user})
         except Exception as e:
-            return Response(status=500, response={"error": e})
+            print(e)
+            return Response(status=500, response={"error": str(e)})

@@ -19,9 +19,9 @@ class UpdateUserService:
     
     password_hash = generate_password_hash(password)
 
-    user = User(name=name, login=login, profile=profile, password=password, email=email)
+    user = User(name=name, login=login, profile=profile, password=password_hash, email=email)
     user.id = id
 
-    result = self.user_repository.update_user(name=name, email=email, profile=profile, login=login, password=password_hash)
+    result = self.user_repository.update_user(user=user)
 
     return result

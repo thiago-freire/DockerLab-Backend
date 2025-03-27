@@ -93,6 +93,7 @@ class UserRepository(UserRepositoryInterface):
         with DbConfigHandler() as connection:
             try:
                 if not user:
+                    print(user)
                     return False
                 
                 u = connection.session.query(User).filter_by(id=user.id).first()
@@ -101,7 +102,9 @@ class UserRepository(UserRepositoryInterface):
                 u.profile = user.profile
                 u.password = user.password
                 u.login = user.login
-                u.profile = user.profile
+                u.email = user.email
+
+                connection.session.commit()
                 
                 return True
             except:
