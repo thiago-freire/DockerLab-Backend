@@ -80,7 +80,7 @@ def createTables():
 
     # create a database connection
     try:
-        with sqlite3.connect('sysDB_teste.db') as conn:
+        with sqlite3.connect('sysDB.db') as conn:
             # create a cursor
             cursor = conn.cursor()
 
