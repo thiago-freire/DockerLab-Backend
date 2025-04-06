@@ -16,12 +16,11 @@ services:
     build:
       context: ./DockerLab-client
       dockerfile: Dockerfile
-      args:
-        - NEXT_PUBLIC_API_URL=http://back-end:5000/
     ports:
       - 3000:3000
     environment:
-      - AUTH_SECRET="chavinha"
+      - NEXT_PUBLIC_API_URL=http://back-end:5000/
+      - AUTH_SECRET=chavinha
       - NEXTAUTH_URL=http://0.0.0.0:3000
     command: "npm run start"
     depends_on:
