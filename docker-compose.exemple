@@ -10,8 +10,7 @@ services:
       - FLASK_CONFIG=development
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - DATABASE_URL=postgres://postgres:postgres@tutorial-db:5432/dev_db
-      - SECRET_KEY=ZQbn05PDeA7v11
+      - URL_DATABASE=sqlite:///sysDB.db
 
   client:
     build:
