@@ -5,14 +5,16 @@ from src.controllers.user import (
     CreateUserController,
     ListUserController,
     AuthenticateUserController,
-    UpdateUserController
+    UpdateUserController,
+    DeleteUserController
 )
 
 from src.services.user import (
     CreateUserService,
     ListUserService,
     AutheticateUserService,
-    UpdateUserService
+    UpdateUserService,
+    DeleteUserService
 )
 
 def create_user_compose():
@@ -46,3 +48,11 @@ def update_user_compose():
     update_user_controller = UpdateUserController(update_user_service)
 
     return update_user_controller
+
+def delete_user_compose():
+    
+    user_repository = UserRepository()
+    delete_user_service = DeleteUserService(user_repository)
+    delete_user_controller = DeleteUserController(delete_user_service)
+
+    return delete_user_controller

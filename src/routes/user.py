@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, Response
-from src.compose.user_compose import create_user_compose, list_user_compose, authenticate_user_compose, update_user_compose
+from src.compose.user_compose import create_user_compose, list_user_compose, authenticate_user_compose, update_user_compose, delete_user_compose
 
 user_routes_bp = Blueprint("user_routes", __name__)
 
@@ -19,6 +19,13 @@ def update_user():
     
     return jsonify(response.response), response.status
 
+@user_routes_bp.route("/delete", methods=["POST"])
+def delete_user():
+    
+    delete_user_controller = delete_user_compose()
+    response = delete_user_controller.handler(request)
+    
+    return jsonify(response.response), response.status
 
 @user_routes_bp.route("/list", methods=["GET"])
 def list_user():
